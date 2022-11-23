@@ -317,7 +317,7 @@ export const stockLogColumns = [
 ];
 
 export const categoryColumns = [
-  // { field: "_id", headerName: "ID", width: 230 },
+  { field: "_id", headerName: "ID", width: 230 },
   {
     field: "name",
     headerName: "Name",
@@ -327,7 +327,7 @@ export const categoryColumns = [
 ];
 
 export const subCategoryColumns = [
-  // { field: "_id", headerName: "ID", width: 230 },
+  { field: "_id", headerName: "ID", width: 230 },
   {
     field: "category",
     headerName: "Category",

@@ -20,29 +20,22 @@ import { subCategoryColumns } from "../../dataTableColumns";
 // } from "../../utils/config";
 import ListHeader from "../../components/listHeader/ListHeader";
 import SnackBar from "../../components/alert/SnackBar";
-
+import Popup from "../../components/popup/Popup";
 
 export default function GetSubCategoryList() {
-    const [data, setData] = useState( [
-        {
-          "_id": "633bdb3cc629d9c21a646faa",
-          "category": "Category 1", 
-            "name": "sub Category 1",
-            // "__v": 0
-        },
-        {
-          "_id": "633bdb3cc629d9c21a646fdaad",
-          "category": "Category 1",
-          "name": "sub Category 2",
-
-          // "__v": 0
-        }
-    ]);
+  const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("");
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
+  const [openPopup, setOpenPopup] = useState(false);
+
+  var subCategory = {
+    name: "",
+  };
   useEffect(() => {
-    // getStockList();
+    getSubCategoryList();
   }, [data]);
 
   const actionColumn = [
@@ -63,13 +56,17 @@ export default function GetSubCategoryList() {
             >
               View
             </Button> */}
-            <IconButton aria-label="delete" size="medium">
+            <IconButton
+              aria-label="edit"
+              size="medium"
+              onClick={() => editSubCategory(params.row)}
+            >
               <EditIcon fontSize="inherit" />
             </IconButton>
             <IconButton
               aria-label="delete"
               size="medium"
-              onClick={() => deleteCategory(params.row._id)}
+              onClick={() => deleteSubCategory(params.row._id)}
             >
               <DeleteIcon fontSize="inherit" />
             </IconButton>
@@ -85,23 +82,23 @@ export default function GetSubCategoryList() {
     },
   ];
 
-  const getStockList = () => {
+  const getSubCategoryList = () => {
     axios
-      .get("https://summer-asia.herokuapp.com/category/get_categories")
+      .get("https://summer-asia.herokuapp.com/subCategory/get_sub_categories")
       .then(function (response) {
         if (response.data.error) {
           console.log(response.data.error_msg);
         } else {
-          setData(response.data.products);
+          setData(response.data.sub_categories);
         }
       })
       .catch(function (error) {
         console.log("error: " + error);
       });
   };
-  const deleteCategory = (id) => {
+  const deleteSubCategory = (id) => {
     axios
-      .delete("https://summer-asia.herokuapp.com/category/" + id)
+      .delete("https://summer-asia.herokuapp.com/subCategory/" + id)
       .then(function (response) {
         if (response.data.error) {
           console.log(response.data.error_msg);
@@ -120,6 +117,49 @@ export default function GetSubCategoryList() {
         setMessage(error);
         setSeverity("error");
       });
+  };
+  const validation = () => {
+    if (name.length === 0) {
+      setOpen(true);
+      setMessage("Some fields are missing");
+      setSeverity("error");
+    } else {
+      updateCategory();
+    }
+  };
+  const updateCategory = () => {
+    subCategory = {
+      name: name,
+    };
+    axios
+      .patch("https://summer-asia.herokuapp.com/subCategory/" + id, subCategory)
+      .then(function (response) {
+        if (response.data.error) {
+          console.log(response.data.error_msg);
+          setOpen(true);
+          setMessage(response.data.error_msg);
+          setSeverity("error");
+        } else {
+          console.log(response);
+          setOpen(true);
+          setMessage(response.data.success_msg);
+          setSeverity("success");
+          setOpenPopup(false);
+          setId("");
+          setName("");
+        }
+      })
+      .catch(function (error) {
+        console.log("error: " + error);
+        setOpen(true);
+        setMessage("error: " + error);
+        setSeverity("error");
+      });
+  };
+  const editSubCategory = (subCategory) => {
+    setOpenPopup(true);
+    setId(subCategory._id);
+    setName(subCategory.name);
   };
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -143,6 +183,61 @@ export default function GetSubCategoryList() {
           isForTransaction={false}
           loading={!data.length}
         />
+        <Popup
+          title="Sub Category Form"
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+        >
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                required
+                id="name"
+                name="name"
+                label="Name"
+                fullWidth
+                autoComplete="given-name"
+                variant="outlined"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/* <FormControlLabel
+                control={
+                  <Checkbox color="secondary" name="status" value="false" />
+                }
+                label="Status"
+                value={status}
+                onChange={(event) => setStatus(event.target.value)}
+              /> */}
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <Grid
+                justifyContent={"flex-end"}
+                container
+                spacing={1}
+                direction={"row"}
+              >
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    size="medium"
+                    color="success"
+                    onClick={() => validation()}
+                  >
+                    Save
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" size="medium" color="error">
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Popup>
         <SnackBar
           open={open}
           severity={severity}
