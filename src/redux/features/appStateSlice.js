@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, } from "@reduxjs/toolkit";
+
 
 const initialState = {
-  appState: "",
+  appState: ""
 };
 
 export const appStateSlice = createSlice({
@@ -10,10 +11,12 @@ export const appStateSlice = createSlice({
   reducers: {
     setAppState: (state, action) => {
       state.appState = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const { setAppState } = appStateSlice.actions;
+export const {
+  setAppState
+} = appStateSlice.actions;
 
 export default appStateSlice.reducer;

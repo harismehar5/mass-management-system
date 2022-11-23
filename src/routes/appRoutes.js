@@ -1,10 +1,10 @@
 import Dashboard from '../pages/dashboard/Dashboard';
 import AddCustomer from '../pages/customer/AddCustomer';
 import GetCustomersList from '../pages/customer/GetCustomersList';
-// import AddCategory from '../pages/category/AddCategory';
-// import GetCategoryList from '../pages/category/GetCategoryList';
-// import AddSubCategory from '../pages/subCategory/AddSubCategory';
-// import GetSubCategoryList from '../pages/subCategory/GetSubCategoryList';
+import AddCategory from '../pages/category/AddCategory';
+import GetCategoryList from '../pages/category/GetCategoryList';
+import AddSubCategory from '../pages/subCategory/AddSubCategory';
+import GetSubCategoryList from '../pages/subCategory/GetSubCategoryList';
 
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 // import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
@@ -21,7 +21,7 @@ const appRoutes = [
   {
     path: "/customer",
     element: <GetCustomersList />,
-    state: "dashboard",
+    state: "customer.list",
     sidebarProps: {
       displayText: "Customer",
       icon: <DashboardOutlinedIcon />
@@ -46,6 +46,102 @@ const appRoutes = [
         state: "customer.add",
         sidebarProps: {
           displayText: "New Customer"
+        },
+      },
+      // {
+      //   path: "/dashboard/analytics",
+      //   element: <AnalyticsPage />,
+      //   state: "dashboard.analytics",
+      //   sidebarProps: {
+      //     displayText: "Analytic"
+      //   }
+      // },
+      // {
+      //   path: "/dashboard/saas",
+      //   element: <SaasPage />,
+      //   state: "dashboard.saas",
+      //   sidebarProps: {
+      //     displayText: "Saas"
+      //   }
+      // }
+    ]
+  },
+  {
+    path: "/category",
+    element: <GetCategoryList />,
+    state: "category.list",
+    sidebarProps: {
+      displayText: "Category",
+      icon: <DashboardOutlinedIcon />
+    },
+    child: [
+      {
+        index: true,
+        element: <GetCategoryList />,
+        state: "category.list"
+      },
+      {
+        path: "/category",
+        element: <GetCategoryList />,
+        state: "category.list",
+        sidebarProps: {
+          displayText: "Categories List"
+        },
+      },
+      {
+        path: "/category/add",
+        element: <AddCategory />,
+        state: "category.add",
+        sidebarProps: {
+          displayText: "New Category"
+        },
+      },
+      // {
+      //   path: "/dashboard/analytics",
+      //   element: <AnalyticsPage />,
+      //   state: "dashboard.analytics",
+      //   sidebarProps: {
+      //     displayText: "Analytic"
+      //   }
+      // },
+      // {
+      //   path: "/dashboard/saas",
+      //   element: <SaasPage />,
+      //   state: "dashboard.saas",
+      //   sidebarProps: {
+      //     displayText: "Saas"
+      //   }
+      // }
+    ]
+  },
+  {
+    path: "/subcategory",
+    element: <GetSubCategoryList />,
+    state: "subcategory.list",
+    sidebarProps: {
+      displayText: "Sbb Category",
+      icon: <DashboardOutlinedIcon />
+    },
+    child: [
+      // {
+      //   index: true,
+      //   element: <GetSubCategoryList />,
+      //   state: "subcategory.list"
+      // },
+      {
+        path: "/subcategory",
+        element: <GetSubCategoryList />,
+        state: "subcategory.list",
+        sidebarProps: {
+          displayText: " Sub Categories List"
+        },
+      },
+      {
+        path: "/subcategory/add",
+        element: <AddSubCategory />,
+        state: "subcategory.add",
+        sidebarProps: {
+          displayText: "New Sub Category"
         },
       },
       // {

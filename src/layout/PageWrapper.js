@@ -11,7 +11,7 @@ const PageWrapper = (props) => {
       dispatch(setAppState(props.state));
     }
   }, [dispatch, props]);
-
+  console.log("props",props)
   return (
     <>{props.children}</>
   );
