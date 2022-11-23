@@ -45,7 +45,7 @@ export default function Login() {
           <input type="email" value="admin@gmail.com" placeholder="Email" />
           <input type="password" value="123456" placeholder="Password" />
           <a href="#">Forgot your password?</a>
-          <Link to="/"><button>Sign In</button></Link> 
+          <Link to="/admin"><button>Sign In</button></Link> 
           
         </form>
       </div>

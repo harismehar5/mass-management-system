@@ -39,7 +39,7 @@ const appRoutes = [
         state: "customer.list"
       },
       {
-        path: "/customer",
+        path: "/admin/customer",
         element: <GetCustomersList />,
         state: "customer.list",
         sidebarProps: {
