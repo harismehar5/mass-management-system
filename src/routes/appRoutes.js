@@ -16,7 +16,7 @@ import GetProductsList from '../pages/product/GetProductsList';
 const appRoutes = [
   {
     // index: true,
-    path: "/",
+    path: "/admin",
     element: <Dashboard/>,
     state: "dashboard",
     sidebarProps: {
@@ -25,7 +25,7 @@ const appRoutes = [
     }
   },
   {
-    path: "/customer",
+    path: "/admin/customer",
     element: <GetCustomersList />,
     state: "customer.list",
     sidebarProps: {
@@ -50,7 +50,7 @@ const appRoutes = [
     ]
   },
   {
-    path: "/product",
+    path: "/admin/product",
     element: <GetProductsList />,
     state: "product.list",
     sidebarProps: {
@@ -64,7 +64,7 @@ const appRoutes = [
         state: "product.list"
       },
       {
-        path: "/product",
+        path: "/admin/product",
         element: <GetProductsList />,
         state: "product.list",
         sidebarProps: {
@@ -75,7 +75,7 @@ const appRoutes = [
     ]
   },
   {
-    path: "/category",
+    path: "/admin/category",
     element: <GetCategoryList />,
     state: "category.list",
     sidebarProps: {
@@ -89,7 +89,7 @@ const appRoutes = [
         state: "category.list"
       },
       {
-        path: "/category",
+        path: "/admin/category",
         element: <GetCategoryList />,
         state: "category.list",
         sidebarProps: {
@@ -123,7 +123,7 @@ const appRoutes = [
     ]
   },
   {
-    path: "/subcategory",
+    path: "/admin/subcategory",
     element: <GetSubCategoryList />,
     state: "subcategory.list",
     sidebarProps: {
@@ -137,7 +137,7 @@ const appRoutes = [
       //   state: "subcategory.list"
       // },
       {
-        path: "/subcategory",
+        path: "/admin/subcategory",
         element: <GetSubCategoryList />,
         state: "subcategory.list",
         sidebarProps: {
