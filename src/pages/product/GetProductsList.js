@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import DataTable from "../../components/dataTable/DataTable";
 // import Sidebar from "../../components/sidebar/SideBar";
 // import Navbar from "../../components/navbar/Navbar";
-import { subCategoryColumns } from "../../dataTableColumns";
+import { productColumns } from "../../dataTableColumns";
 
 // import {
 //   DELETE_CUSTOMER_BY_ID,
@@ -20,22 +20,27 @@ import { subCategoryColumns } from "../../dataTableColumns";
 // } from "../../utils/config";
 import ListHeader from "../../components/listHeader/ListHeader";
 import SnackBar from "../../components/alert/SnackBar";
+import Popup from "../../components/popup/Popup";
 
-
-export default function GetSubCategoryList() {
+export default function GetProductsList() {
     const [data, setData] = useState( [
         {
-          "_id": "633bdb3cc629d9c21a646faa",
-          "category": "Category 1", 
-            "name": "sub Category 1",
-            // "__v": 0
+            "_id": "633bdb3cc629d9c21a646faa",
+            "name": "Product B",
+            "price": 100,
+            "quantity": 14,
+            "status": true,
+            "stock_log": [],
+            "__v": 0
         },
         {
-          "_id": "633bdb3cc629d9c21a646fdaad",
-          "category": "Category 1",
-          "name": "sub Category 2",
-
-          // "__v": 0
+            "_id": "63515dc46eabf8471c790bcc",
+            "name": "Product B",
+            "price": 1200,
+            "quantity": 20,
+            "status": true,
+            "stock_log": [],
+            "__v": 0
         }
     ]);
   const [open, setOpen] = useState(false);
@@ -69,7 +74,7 @@ export default function GetSubCategoryList() {
             <IconButton
               aria-label="delete"
               size="medium"
-              onClick={() => deleteCategory(params.row._id)}
+              onClick={() => deleteProduct(params.row._id)}
             >
               <DeleteIcon fontSize="inherit" />
             </IconButton>
@@ -87,7 +92,7 @@ export default function GetSubCategoryList() {
 
   const getStockList = () => {
     axios
-      .get("https://summer-asia.herokuapp.com/category/get_categories")
+      .get("https://summer-asia.herokuapp.com/product/get_products")
       .then(function (response) {
         if (response.data.error) {
           console.log(response.data.error_msg);
@@ -99,9 +104,9 @@ export default function GetSubCategoryList() {
         console.log("error: " + error);
       });
   };
-  const deleteCategory = (id) => {
+  const deleteProduct = (id) => {
     axios
-      .delete("https://summer-asia.herokuapp.com/category/" + id)
+      .delete("https://summer-asia.herokuapp.com/product/" + id)
       .then(function (response) {
         if (response.data.error) {
           console.log(response.data.error_msg);
@@ -133,13 +138,13 @@ export default function GetSubCategoryList() {
       <div className="list-container">
         {/* <Navbar /> */}
         <ListHeader
-          header={"Category List"}
+          header={"Products List"}
           firstButton={true}
-          firstButtonText={"Add New Sub Category"}
+          firstButtonText={"Add New Product"}
         />
         <DataTable
           data={data}
-          columns={subCategoryColumns.concat(actionColumn)}
+          columns={productColumns.concat(actionColumn)}
           isForTransaction={false}
           loading={!data.length}
         />

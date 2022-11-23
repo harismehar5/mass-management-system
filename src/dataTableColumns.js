@@ -315,3 +315,29 @@ export const stockLogColumns = [
     width: 230,
   },
 ];
+
+export const categoryColumns = [
+  // { field: "_id", headerName: "ID", width: 230 },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 230,
+  }
+
+];
+
+export const subCategoryColumns = [
+  // { field: "_id", headerName: "ID", width: 230 },
+  {
+    field: "category",
+    headerName: "Category",
+    width: 230,
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 230,
+  },
+
+
+];
